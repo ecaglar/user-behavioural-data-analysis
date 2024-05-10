@@ -89,7 +89,7 @@ This implementation introduces concurrency by using goroutines and channels in G
 ## 3. Map Sharding and Individual Mutexes
 This approach addresses the limitation of the global mutex by splitting the map into smaller shards, each protected by its own mutex. This strategy reduces lock contention, allowing for better scalability in high-concurrency scenarios. The distributed locking mechanism can improve performance when different parts of the data exhibit distinct access patterns. However, this approach increases implementation complexity.
 
-To effectively visualize and compare the performance and memory usage of your three Go implementations across different dataset sizes, I'll prepare a series of charts. These will include:
+To effectively visualize and compare the performance and memory usage of the three Go implementations across different dataset sizes,i prepared a series of charts. These will include:
 
 **Execution Time Comparison:** This will show the time taken by each implementation for small, medium, and large datasets.
 
