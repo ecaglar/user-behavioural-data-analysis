@@ -10,7 +10,7 @@ The project consists of several Go files, each with a specific purpose:
 - `processing.go`: Contains logic to process the incoming data streams. It defines goroutines for processing records concurrently.
 - `types.go`: Defines all the custom types used throughout the project, including structures for user data and event records.
 - `utils.go`: Provides utility functions such as validators and helpers for data manipulation and error handling.
-
+- `main_test.go` : Test for the logic
 ## Requirements
 
 - Go 1.15 or higher (due to the use of certain standard library features and modules support)
@@ -36,6 +36,12 @@ go run . --infile="path/to/inputfile.data" --outfile="path/to/outputfile.csv"
 ```
 
 Replace `path/to/inputfile.data` and `path/to/outputfile.csv` with the paths to your actual input and output files.
+
+### Running the Test
+
+```bash
+go test
+```
 
 
 
@@ -128,17 +134,7 @@ Data Sets
 
 
 
-## Observations with Logarithmic Scale:
-### Execution Time (Log Scale):
-For small and medium datasets, the differences among the implementations are more discernible. The sharding approach remains consistently the fastest, emphasizing its efficiency even at smaller scales.
-The improvement in execution time from basic to more advanced implementations is clearer with the logarithmic scale.
-
-
-### Allocated Memory (Log Scale):
-The memory usage differences are accentuated, especially for the medium and large datasets.
-It's apparent that the basic implementation consumes significantly more memory than the other two methods for medium and large datasets, while for small datasets, the differences are minimal but still visible.
-
-## Details
+## Observations 
 
 ### Execution Time Comparison:
 The 'Basic' implementation generally performs better in execution time across all dataset sizes, particularly notable in the large dataset.
@@ -147,11 +143,6 @@ Both the 'Channels & Global Mutex' and 'Sharding & Individual Mutexes' implement
 'Basic' implementation has the least memory allocation in small and medium datasets but escalates considerably in the large dataset.
 'Channels & Global Mutex' has the highest memory allocation in the large dataset, indicating less efficient memory usage.
 'Sharding & Individual Mutexes' balances between the other two, showing moderate memory usage.
-### Total Allocated Memory Comparison:
-Similar trends are seen in the allocated memory chart, with 'Channels & Global Mutex' and 'Sharding & Individual Mutexes' consuming more memory overall, especially noticeable in the large dataset.
-### System Memory Usage Comparison:
-All implementations increase their system memory usage with larger datasets.
-'Channels & Global Mutex' tends to use less system memory in the large dataset compared to 'Basic' but is comparable to 'Sharding & Individual Mutexes'.
 
 ### Conclusion
 The 'Basic' implementation, while simple, provides the best execution time, especially for large datasets. However, it has high spikes in memory usage as the dataset size increases.
